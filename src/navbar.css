@@ -1,0 +1,32 @@
+/* css file for the navigation bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+
+    background-color: #D8A0A6;
+    color: white;
+}
+  
+.navbar-left, .navbar-right, .navbar-center{
+    display: block;
+
+    padding: 10px;
+
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+
+.navbar-left:hover, .navbar-right:hover{
+    background-color: white;
+    color:#D8A0A6;
+}
+  
+.navbar-left {
+    float: left;
+    
+}
+  
+.navbar-right {
+    float: right;
+}
