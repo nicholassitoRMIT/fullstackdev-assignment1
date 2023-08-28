@@ -15,16 +15,21 @@ import MoviePage from './Pages/MoviesPage';
 import ProfilePage from './Pages/ProfilePage';
 
 function App() {
+  //frUser = first render user
   const frUser = localStorage.getItem("currentUser") === null ? false : true
   const [hasUser, setHasUser] = useState(frUser)
 
+  //hasUser state is used for conditional rendering based on whether a user is logged in or not.
+  
+  //Conditional rendering is used in the Navbar(Layout), Homepage and Movie page.
+  //The state can be modified from the log-in, sign-up and profile pages(which has logging out)
   return (
     <div className='App'>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Layout hasUser = {hasUser}/>}>
-            <Route index element={<Homepage/>} />
-            <Route path='movies' element={<MoviePage/>} />
+            <Route index element={<Homepage hasUser = {hasUser}/>} />
+            <Route path='movies' element={<MoviePage hasUser = {hasUser}/>} />
             <Route path='log-in' element={<LogInPage setHasUser = {setHasUser}/>} />
             <Route path='sign-up' element={<SignUpPage setHasUser = {setHasUser}/>} />
             <Route path='profile' element={<ProfilePage setHasUser = {setHasUser}/>} />

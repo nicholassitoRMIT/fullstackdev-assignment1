@@ -39,15 +39,18 @@ const Registration = (props) => {
         }
         //If there are no problems, create the account and log the user in.
         else {
+            var date = new Date().toLocaleDateString("en-GB")
             localStorage.setItem(email, JSON.stringify({
                 name : name, 
-                password : password
+                password : password,
+                date : date
             }));
 
             localStorage.setItem("currentUser", JSON.stringify({
                 email : email,
                 name : name,
-                password : password
+                password : password,
+                date : date
             }))
             alert("Successful registration!")
             props.setHasUser(true)
@@ -135,9 +138,6 @@ const Registration = (props) => {
 
     return (
         <div className="page">
-            <h1>
-                Sign Up
-            </h1>
             <form onSubmit={registerUser}>
                 <div>
                     <label className="input-label">E-mail</label>

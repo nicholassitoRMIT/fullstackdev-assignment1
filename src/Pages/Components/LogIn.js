@@ -63,8 +63,6 @@ function LogIn(props){
 
     return (
         <div>
-            <h1>Log in</h1>
-
             <form onSubmit={logIn}>
                 <div>
                     <label className="input-label">Email</label>
