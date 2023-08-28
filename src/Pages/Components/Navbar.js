@@ -1,7 +1,11 @@
 import React from "react"
 import { Link } from "react-router-dom";
 
-function Navbar(){
+import LogOut from "./LogOut";
+
+const sUser = "currentUser"
+
+function Navbar(props){
     return(
         <div className="navbar">
                 <div>
@@ -11,10 +15,16 @@ function Navbar(){
                 <div>
                     < Link to="/" className="navbar-center">LOOP CINEMAS</Link>
                 </div>
+                {props.hasUser ? 
+                <div>
+                    < Link to="/profile" className="navbar-right">My Profile</Link>
+                </div>
+                :
                 <div>
                     < Link to="/log-in" className="navbar-right">Log in</Link>
                     < Link to="/sign-up" className="navbar-right">Sign up</Link>
                 </div>
+                }
         </div>
     )
 }

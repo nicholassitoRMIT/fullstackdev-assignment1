@@ -1,9 +1,9 @@
 import React from "react"
 import Registration from "./Components/SignUp"
 
-function SignUpPage(){
+function SignUpPage(props){
     return(
-        < Registration/>
+        < Registration setHasUser = {props.setHasUser}/>
     )
 }
 

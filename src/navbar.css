@@ -15,11 +15,14 @@
     text-decoration: none;
     color: white;
     font-size: 20px;
+
+    background-color: #D8A0A6;
 }
 
 .navbar-left:hover, .navbar-right:hover{
     background-color: white;
     color:#D8A0A6;
+    cursor: pointer;
 }
   
 .navbar-left {
@@ -29,4 +32,13 @@
   
 .navbar-right {
     float: right;
+}
+
+.navbar-logout {
+    float: right;
+    display: block;
+
+    font-size: 20px;
+
+    padding: 10px;
 }

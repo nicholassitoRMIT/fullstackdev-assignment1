@@ -6,3 +6,8 @@ TODO: UNFINISHED
     background-color: #D8A0A6;
     color: white;
 }
+
+.footer-text {
+    display:block;
+    padding: 20px;
+}

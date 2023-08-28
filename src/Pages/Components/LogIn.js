@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 //s in this case means string
 const sPassword = "password"
@@ -6,9 +7,10 @@ const sName = "name"
 
 const sUser = "currentUser"
 
-function LogIn(){
+function LogIn(props){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const changePage = useNavigate()
 
     function onChangeEmail(e){
         setEmail(e.target.value)
@@ -29,6 +31,8 @@ function LogIn(){
         //Users are stored with the e-mail as key, so we get the user from localStorage
 
         var user = localStorage.getItem(email)
+
+        //Make sure all input fields are filled out
         if(email === '' || password === ''){
             alert("Please fill out all fields!")
         }
@@ -41,12 +45,14 @@ function LogIn(){
 
             //check for correct password
             if(data[sPassword] === password){
-                alert("Successful login")
                 localStorage.setItem(sUser, JSON.stringify({
                     email : email,
                     name : data[sName],
                     password : data[sPassword]
                 }))
+                alert("Successful log-in!")
+                props.setHasUser(true)
+                changePage('/')
             }
             else{
                 alert("Incorrect password!")

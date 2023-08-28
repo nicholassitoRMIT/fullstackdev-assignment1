@@ -5,7 +5,7 @@ import React from "react";
 function Footer(){
     return (
         <div className="footer">
-            <p>Loop cinemas footer thing</p>
+            <p className="footer-text">Loop cinemas footer thing</p>
         </div>
     )
 }

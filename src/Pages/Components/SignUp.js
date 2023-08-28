@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Registration = () => {
+const Registration = (props) => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [conpassword, setConPassword] = useState('')
+
+    const changePage = useNavigate()
 
     function registerUser(e){
         e.preventDefault()
@@ -46,6 +49,9 @@ const Registration = () => {
                 name : name,
                 password : password
             }))
+            alert("Successful registration!")
+            props.setHasUser(true)
+            changePage('/')
         }
     }
 

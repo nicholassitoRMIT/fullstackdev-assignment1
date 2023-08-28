@@ -1,17 +1,18 @@
 import React from "react"
+import { useNavigate } from "react-router-dom"
 
 //UNFINISHED
+const sUser = "currentUser"
 
-const LogOut = () => {
+function LogOut(props){
+
     function logOut(){
-        localStorage.removeItem("currentUser")
+        localStorage.removeItem(sUser)
+        props.setHasUser(false)
     }
 
     return (
-        <div>
-            <h1>Log out</h1>
             <button onClick={logOut}>Log out</button>
-        </div>
     )
 }
 

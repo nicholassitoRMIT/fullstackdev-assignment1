@@ -1,10 +1,10 @@
 import React from "react"
 import LogIn from "./Components/LogIn"
 
-function LogInPage(){
+function LogInPage(props){
     return(
         <div>
-            <LogIn />
+            <LogIn setHasUser = {props.setHasUser}/>
         </div>
     )
 }
