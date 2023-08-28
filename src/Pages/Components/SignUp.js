@@ -14,8 +14,12 @@ const Registration = () => {
 
         //If registration fails, display an alert. This should be changed to something better
 
+        //Make sure all input fields are filled out
+        if(email === '' || name === '' || password === '' || conpassword ===''){
+            alert("Please fill out all fields!")
+        }
         //Check if the email follows the correct format
-        if (validEmail() === false){
+        else if (validEmail() === false){
             alert("Invalid e-mail!")
         }
         //Check if the e-mail is currently in use

@@ -29,7 +29,10 @@ function LogIn(){
         //Users are stored with the e-mail as key, so we get the user from localStorage
 
         var user = localStorage.getItem(email)
-        if(user === null){
+        if(email === '' || password === ''){
+            alert("Please fill out all fields!")
+        }
+        else if(user === null){
             //if the user is null, then there is no e-mail associated with the account
             alert("No e-mail associated with this account!")
         }
