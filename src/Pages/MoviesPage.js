@@ -5,7 +5,7 @@ import React from "react"
 function MoviePage(){
     return(
         <h1>
-            moobee
+            moobee (wip)
         </h1>
     )
 }
