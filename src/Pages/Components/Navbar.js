@@ -1,10 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom";
 
-import LogOut from "./LogOut";
-
-const sUser = "currentUser"
-
 function Navbar(props){
     return(
         <div className="navbar">

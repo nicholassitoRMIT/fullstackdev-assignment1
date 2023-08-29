@@ -38,13 +38,16 @@ function LogIn(props){
         }
         else if(user === null){
             //if the user is null, then there is no e-mail associated with the account
-            alert("No e-mail associated with this account!")
+            alert("No account associated with this e-mail!")
         }
         else {
             var data = JSON.parse(user)
 
             //check for correct password
             if(data[sPassword] === password){
+                //Upon a successful log-in, put the user as currentUser in localStorage, 
+                //show a pop-up for a successful log-in, change the hasUser state
+                //and send the user to the homepage.
                 localStorage.setItem(sUser, JSON.stringify({
                     email : email,
                     name : data[sName],
@@ -65,7 +68,7 @@ function LogIn(props){
         <div>
             <form onSubmit={logIn}>
                 <div>
-                    <label className="input-label">Email</label>
+                    <label className="input-label">E-mail</label>
                     <input type='text' className="input-field" value={email} onChange={onChangeEmail} placeholder="E-mail"/>
                 </div>
 

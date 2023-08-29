@@ -43,3 +43,23 @@ css file for the sign-up and log-in forms.
     cursor: pointer;
     background-color: #d8a0a6c5;
 }
+
+.button-box{
+    display: inline-block;
+}
+
+.dangerous-button{
+    display: block;
+    font-size: 20px;
+    padding: 5px 20px 5px 20px;
+    border-radius: 10px;
+    margin: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color:#ff0000;
+}
+
+.dangerous-button:hover{
+    cursor: pointer;
+    background-color: #ff0000c5;
+}

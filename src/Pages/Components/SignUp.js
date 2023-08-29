@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import PasswordRequirement from "./PasswordRequirement";
 
 const Registration = (props) => {
     const [name, setName] = useState('')
@@ -137,7 +138,7 @@ const Registration = (props) => {
     }
 
     return (
-        <div className="page">
+        <div>
             <form onSubmit={registerUser}>
                 <div>
                     <label className="input-label">E-mail</label>
@@ -162,19 +163,9 @@ const Registration = (props) => {
                 <div>
                     <button className="input-submit" type="submit">Sign Up</button>
                 </div>
-
-                <div>
-                    <ul className="password-req-list">
-                        <h3>Password must follow these requirements:</h3>
-                        <li className="password-req">Must be at least 8 characters</li>
-                        <li className="password-req">Must include a lowercase letter</li>
-                        <li className="password-req">Must include an uppercase letter</li>
-                        <li className="password-req">Must include a number</li>
-                        <li className="password-req">Must include a special character</li>
-                    </ul>
-                </div>
-
             </form>
+
+            <PasswordRequirement />
         </div>
     )
 }
