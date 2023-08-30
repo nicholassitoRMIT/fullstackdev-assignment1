@@ -1,9 +1,19 @@
 import React from "react"
 
-//UNFINISHED
+const sUser = "currentUser"
+const sName = "name"
 
 function Greeting(props){
+    var user = localStorage.getItem(sUser)
+    user = JSON.parse(user)
+
     return (
-        <h1>Hi {props.name}</h1>
+        <div>
+            {props.hasUser ?
+            <h1>Welcome, {user[sName]}</h1> :
+            <h1>Welcome, guest!</h1>}
+        </div>
     )
 }
+
+export default Greeting

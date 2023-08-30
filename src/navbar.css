@@ -12,6 +12,8 @@
 
     padding: 10px;
 
+    border-color: #2B2B2C;
+    
     text-decoration: none;
     color: white;
     font-size: 20px;
@@ -20,6 +22,8 @@
 }
 
 .navbar-left:hover, .navbar-right:hover{
+    
+    transition: 0.2s;
     background-color: white;
     color:#D8A0A6;
     cursor: pointer;
@@ -27,18 +31,10 @@
   
 .navbar-left {
     float: left;
-    
+    border-right-style: solid;
 }
   
 .navbar-right {
     float: right;
-}
-
-.navbar-logout {
-    float: right;
-    display: block;
-
-    font-size: 20px;
-
-    padding: 10px;
+    border-left-style: solid;
 }
