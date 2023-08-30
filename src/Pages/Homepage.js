@@ -5,7 +5,7 @@ import React from "react"
 function Homepage(){
     return(
         <h1>
-            HMOE (WIP)
+            Currently Showing Movies
         </h1>
     )
 }
