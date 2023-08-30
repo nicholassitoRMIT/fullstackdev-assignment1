@@ -5,7 +5,7 @@ import React from "react"
 function Homepage(){
     return(
         <h1>
-            Currently Showing Movies (tester text)
+            Currently Showing Movies
         </h1>
     )
 }
