@@ -1,5 +1,4 @@
 import React from "react"
-import imgBike from './images/imgBike.jpg'
 
 //TODO: UNFINISHED
 
@@ -9,6 +8,8 @@ function Homepage(){
             <h1>
                 Currently Showing Movies
             </h1>
+
+            <img src={'./images/imgBike.jpg'} className="imgBike" alt=""/>
 
         </div>
     )
