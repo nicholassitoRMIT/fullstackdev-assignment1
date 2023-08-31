@@ -13,17 +13,17 @@ function Homepage(){
 
             <div className="row1">
                 <div className="imgRow1">
-                    <img src={'./images/imgClimber.jpg'} className="Climber"></img>
+                    <img src={'./images/imgClimber.jpg'} className="Climber" alt="ClimberImage"></img>
                     <h2>The Climber</h2>
                 </div>
 
                 <div className="imgRow1">
-                    <img src={'./images/imgCoolWalk.jpg'} className="BadassWalk"></img>
+                    <img src={'./images/imgCoolWalk.jpg'} className="BadassWalk" alt="WalkerImage"></img>
                     <h2>Crossroads</h2>
                 </div>
 
                 <div className="imgRow1">
-                    <img src={'./images/imgDancer.jpg'} className="Dancer"></img>
+                    <img src={'./images/imgDancer.jpg'} className="Dancer" alt="DancerImage"></img>
                     <h2>Dance Dance Revolution</h2>
                 </div>
 
