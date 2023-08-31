@@ -10,7 +10,7 @@ function DeleteAccount(props){
 
 
     function deleteAccount(){
-        if (window.confirm("Are you sure you want to delete your account?")){
+        if (window.confirm("Are you sure you want to delete your account? This action cannot be undone.")){
             localStorage.removeItem(user[sEmail])
             localStorage.removeItem(sUser)
 

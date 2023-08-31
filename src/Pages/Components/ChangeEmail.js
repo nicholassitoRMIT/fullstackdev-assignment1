@@ -6,7 +6,7 @@ const sEmail = "email"
 const sUser = "currentUser"
 const sDate = "date"
 
-function ChangeEmail(){
+function ChangeEmail(props){
     var user = localStorage.getItem(sUser)
     user = JSON.parse(user)
 
@@ -77,7 +77,7 @@ function ChangeEmail(){
             }))
 
             alert("Successfully changed e-mail!")
-
+            props.setCurrentEmail(email)
             vcancel()
         }
     }
@@ -108,7 +108,6 @@ function ChangeEmail(){
 
     return(
         <div>
-            <h2>E-mail</h2>
             {editEmail ? 
                 <>
                 {pwConfimation ? 
@@ -145,9 +144,6 @@ function ChangeEmail(){
                 </>
                 : 
                 <>
-                    <div>
-                        <p>{user[sEmail]}</p>
-                    </div>
                     <div>
                         <button className="input-submit" onClick={changeEditEmail}>Change e-mail</button>
                     </div>

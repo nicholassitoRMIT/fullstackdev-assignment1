@@ -149,7 +149,6 @@ function ChangePassword(){
 
     return (
         <div>
-            <h2>Change password</h2>
             {editPassword ? 
                 <>
                 {pwConfimation ? 
