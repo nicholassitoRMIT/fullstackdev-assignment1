@@ -6,7 +6,7 @@ const sEmail = "email"
 const sUser = "currentUser"
 const sDate = "date"
 
-function ChangeName(){
+function ChangeName(props){
     var user = localStorage.getItem(sUser)
     user = JSON.parse(user)
 
@@ -80,14 +80,13 @@ function ChangeName(){
             }))
 
             alert("Successfully changed name!")
-
+            props.setCurrentName(name)
             vcancel()
         }
     }
 
     return(
         <div>
-            <h2>Your name</h2>
             {editName ? 
                 <>
                 {pwConfimation ? 
@@ -124,9 +123,6 @@ function ChangeName(){
             </>
             : 
             <>
-                <div>
-                    <p>{user[sName]}</p>
-                </div>
                 <div>
                     <button className="input-submit" onClick={changeEditName}>Change name</button>
                 </div>
