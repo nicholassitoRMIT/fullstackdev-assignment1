@@ -4,4 +4,27 @@
   color:#D8A0A6;
 }
 
+.row1 {
+  display: flex;
+  margin-top: 50px;
+}
+
+.imgRow1 {
+  flex: 33.33%;
+  padding: 30px;
+}
   
+.Climber {
+  height: 300px;
+  width: 200px;
+}
+
+.BadassWalk {
+  height: 300px;
+  width: 200px;
+}
+
+.Dancer {
+  height: 300px;
+  width: 200px;
+}
