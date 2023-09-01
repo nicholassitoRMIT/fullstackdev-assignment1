@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
+import Reviews from "./Components/Review";
+import ReviewForm from "./Components/ReviewForm";
 
-function DanceMovie(){
+function DanceMovie(props){
+    const movieName = "Dance Dance Revolution"
+
+    var reviews = localStorage.getItem(props.movieName)
+    if(reviews === null){
+        localStorage.setItem(props.movieName, JSON.stringify([]))
+        reviews = localStorage.getItem(props.movieName)
+    }
+    var parsedReviews = JSON.parse(reviews)
+
+    const [currentReviews, setCurrentReviews] = useState(parsedReviews)
+
     return(
         <div>
             <div className="dance-dance">
@@ -17,9 +30,19 @@ function DanceMovie(){
                 <p>16:00 - 18:00</p>
             </div>
 
-            <h2>User Reviews</h2>
             <hr width="90%" align="center" color="#D8A0A6"></hr>
-            {/* add reviews after this */}
+            
+            {props.hasUser ?
+                <><h2>My review</h2>
+                <ReviewForm movieName={movieName} setCurrentReviews={setCurrentReviews}/></>
+                :
+                <><h2>You must be logged in to leave a review.</h2></>
+            }
+            
+            <hr width="90%" align="center" color="#D8A0A6"></hr>
+            <h2>User Reviews</h2>
+            
+            <Reviews movieName={movieName} currentReviews={currentReviews}/>
         </div>
     )
 }

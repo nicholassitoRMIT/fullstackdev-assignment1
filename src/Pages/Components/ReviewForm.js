@@ -3,12 +3,13 @@ import React, { useState } from "react";
 const sUser = "currentUser"
 const sEmail = "email"
 const sName = "name"
+const sStars = "stars"
+const sText = "text"
 
 function ReviewForm(props){
     var user = localStorage.getItem(sUser)
     user = JSON.parse(user)
 
-    var hasReview = false
     const [writeReview, setWrite] = useState(false)
 
     const [text, setText] = useState('')
@@ -22,20 +23,29 @@ function ReviewForm(props){
     }
 
     var parsedReviews = JSON.parse(currentReviews)
-    var myReview= -1
+    var myReviewExists = false
+    var myReviewIndex = -1
+    var myReview = []
 
     for (const review of parsedReviews){
         var pReview = JSON.parse(review)
         if(pReview[sEmail] === user[sEmail]){
-            hasReview = true
-            myReview = parsedReviews.indexOf(review)
-            console.log(myReview)
+            myReviewExists = true
+            myReviewIndex = parsedReviews.indexOf(review)
+            myReview = pReview
+            console.log(myReviewIndex)
             break
         }
     }
 
+    const [hasReview, setHasReview] = useState(myReviewExists)
+
     function changeWriteReview(){
         setWrite(!writeReview)
+    }
+
+    function changeHasReview(){
+        setHasReview(!hasReview)
     }
 
     function onChangeStars(s){
@@ -48,9 +58,14 @@ function ReviewForm(props){
 
     function deleteReview(){
         if(window.confirm("Are you sure you want to delete your review? This action cannot be undone.")){
-            parsedReviews.splice(myReview, 1)
+            parsedReviews.splice(myReviewIndex, 1)
+            props.setCurrentReviews(parsedReviews)
 
             localStorage.setItem(props.movieName, JSON.stringify(parsedReviews))
+
+            alert("Successfully deleted review!")
+
+            changeHasReview()
         } 
     }
 
@@ -81,24 +96,26 @@ function ReviewForm(props){
             })
 
             if(hasReview){
-                alert("another test passed")
+                alert("Successfully edited review!")
 
-                parsedReviews.splice(myReview, 1)
+                parsedReviews.splice(myReviewIndex, 1)
                 parsedReviews.push(thisReview)
+                props.setCurrentReviews(parsedReviews)
 
                 localStorage.setItem(props.movieName, JSON.stringify(parsedReviews))
 
                 cancel()
             }
             else {
-                alert("test passed")
+                alert("Successfully submitted review!")
 
                 currentReviews = JSON.parse(currentReviews)
 
                 currentReviews.push(thisReview)
                 localStorage.setItem(props.movieName, JSON.stringify(currentReviews))
+                props.setCurrentReviews(parsedReviews)
 
-                hasReview = true
+                changeHasReview()
 
                 cancel()
             }
@@ -134,6 +151,8 @@ function ReviewForm(props){
             <>
                 {hasReview ?
                 <div>
+                    <h3>{myReview[sName]}: {myReview[sStars]}</h3>
+                    <p>{myReview[sText]}</p>
                     <div className="button-box">
                         <button className="input-submit" onClick={changeWriteReview}>Edit review</button>
                     </div>
@@ -143,6 +162,7 @@ function ReviewForm(props){
                 </div>
                 : 
                 <div>
+                    <p>You have not reviewed this movie! Would you like to review it?</p>
                     <button className="input-submit" onClick={changeWriteReview}>Write review</button>
                 </div>
                 }
