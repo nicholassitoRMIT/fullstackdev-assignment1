@@ -13,6 +13,12 @@ import Homepage from './Pages/Homepage';
 import LogInPage from './Pages/LogInPage';
 import MoviePage from './Pages/MoviesPage';
 import ProfilePage from './Pages/ProfilePage';
+import ChampionsRunMovie from './Pages/ChampionsRun';
+import KickoutMovie from './Pages/Kickout';
+import TheSkiierMovie from './Pages/TheSkiier';
+import DanceMovie from './Pages/Dance';
+import TheClimberMovie from './Pages/TheClimber';
+import CrossroadsMovie from './Pages/Crossroads';
 
 import "./fonts/FjallaOne-Regular.ttf";
 
@@ -35,6 +41,12 @@ function App() {
             <Route path='log-in' element={<LogInPage setHasUser = {setHasUser}/>} />
             <Route path='sign-up' element={<SignUpPage setHasUser = {setHasUser}/>} />
             <Route path='profile' element={<ProfilePage setHasUser = {setHasUser}/>} />
+            <Route path='champions-run' element={<ChampionsRunMovie hasUser = {hasUser}/>}/>
+            <Route path='kickout' element={<KickoutMovie hasUser = {hasUser}/>}/>
+            <Route path='the-skiier' element={<TheSkiierMovie hasUser = {hasUser}/>}/>
+            <Route path='dance-dance-revolution' element={<DanceMovie hasUser = {hasUser}/>}/>
+            <Route path='the-climber' element={<TheClimberMovie hasUser = {hasUser}/>}/>
+            <Route path='crossroads' element={<CrossroadsMovie hasUser = {hasUser}/>}/>
             <Route path='*' element={<Homepage/>} />
           </Route>
         </Routes>
