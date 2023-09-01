@@ -13,6 +13,8 @@ const sEmail = "email"
 const sDate = "date"
 
 function ProfilePage(props){
+    //Profile page component.
+    //Since the 
     var user = localStorage.getItem(sUser)
     user = JSON.parse(user)
 
@@ -23,12 +25,15 @@ function ProfilePage(props){
     return(
         <div className="page">
             <ProfileInfo currentName = {currentName} currentEmail = {currentEmail} dateJoined = {dateJoined}/>
+
             <h2>Change details</h2>
             <ChangeEmail setCurrentEmail = {setCurrentEmail}/>
             <ChangeName setCurrentName = {setCurrentName}/>
             <ChangePassword />
+
             <h2>Log out</h2>
             <LogOut setHasUser = {props.setHasUser}/>
+
             <h2>Delete account</h2>
             <DeleteAccount setHasUser = {props.setHasUser}/>
         </div>
