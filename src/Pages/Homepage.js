@@ -26,7 +26,7 @@ function Homepage(){
                     <img src={'./images/imgDancer.jpg'} className="Dancer" alt="DancerImage"></img>
                     <h2>Dance Dance Revolution</h2>
                 </div>
-
+                
             </div>
         </div>
     )
