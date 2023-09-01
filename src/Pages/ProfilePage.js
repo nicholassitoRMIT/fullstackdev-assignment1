@@ -13,9 +13,11 @@ const sEmail = "email"
 const sDate = "date"
 
 function ProfilePage(props){
-    //Profile page component.
-    //It has 2 hooks to update the displayed profile information whenever it is updated.
-    
+    //Profile page.
+    //It has 2 hooks to update the displayed profile information 
+    //whenever it is updated, which are passed as props to its components.
+
+    //The page uses the ProfileInfo, ChangeName/Email/Password, LogOut and DeleteAccount components.
     var user = localStorage.getItem(sUser)
     user = JSON.parse(user)
 

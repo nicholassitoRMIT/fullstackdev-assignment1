@@ -3,8 +3,10 @@ import Reviews from "./Components/Review";
 import ReviewForm from "./Components/ReviewForm";
 
 function KickoutMovie(props){
+    //Variable for the movie name to be passed as a prop.
     const movieName = "Kickout"
 
+    //Initialise an empty list of reviews if there aren't any.
     var reviews = localStorage.getItem(props.movieName)
     if(reviews === null){
         localStorage.setItem(props.movieName, JSON.stringify([]))
@@ -12,6 +14,7 @@ function KickoutMovie(props){
     }
     var parsedReviews = JSON.parse(reviews)
 
+    //UseState of the list of reviews to be passed as a prop.
     const [currentReviews, setCurrentReviews] = useState(parsedReviews)
 
     return(
