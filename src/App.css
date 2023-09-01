@@ -28,3 +28,28 @@
   height: 300px;
   width: 200px;
 }
+
+.row2 {
+  display: flex;
+  margin-top: 50px;
+}
+
+.imgRow2 {
+  flex: 33.33%;
+  padding: 30px;
+}
+
+.Baseball {
+  height: 300px;
+  width: 200px;
+}
+
+.Skiier {
+  height: 300px;
+  width: 200px;
+}
+
+.Football {
+  height: 300px;
+  width: 200px;
+}

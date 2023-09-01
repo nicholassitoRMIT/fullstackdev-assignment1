@@ -4,6 +4,7 @@ TODO: UNFINISHED
 @import url(https://fonts.google.com/specimen/Roboto+Condensed);
 
 .footer {
+    padding-top: 10px;
     background-color: #D8A0A6;
     color: white;
 }
