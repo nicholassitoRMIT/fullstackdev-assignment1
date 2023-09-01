@@ -1,6 +1,7 @@
 /* css file for the footer 
 TODO: UNFINISHED
 */
+@import url(https://fonts.google.com/specimen/Roboto+Condensed);
 
 .footer {
     background-color: #D8A0A6;
@@ -9,5 +10,15 @@ TODO: UNFINISHED
 
 .footer-text {
     display:block;
-    padding: 20px;
+    padding-bottom: 20px;
+}
+
+a{
+    text-decoration: none;
+    color: bisque;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: aliceblue;
 }
