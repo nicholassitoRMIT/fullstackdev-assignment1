@@ -24,6 +24,19 @@ input {
 button {
   font-family: 'FjallaOne', sans-serif, Arial;
 }
+
+h3 {
+  font-family: 'FjallaOne', sans-serif, Arial;
+}
+
+li {
+  font-family: 'FjallaOne', sans-serif, Arial;
+}
+
+.password-req-list {
+  padding-bottom: 20px;
+}
+
 .App {
   text-align: center;
   background-color: #2B2B2C;

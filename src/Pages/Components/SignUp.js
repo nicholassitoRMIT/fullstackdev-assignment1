@@ -165,7 +165,7 @@ const Registration = (props) => {
                     <button className="input-submit" type="submit">Sign Up</button>
                 </div>
             </form>
-
+            <hr width="90%" align="center" color="#D8A0A6"></hr>
             <PasswordRequirement />
         </div>
     )
