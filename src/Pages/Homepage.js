@@ -29,7 +29,7 @@ function Homepage(){
                     <img src={'./images/imgCoolWalk.jpg'} className="BadassWalk" alt="WalkerImage"></img>
                     <h2>Crossroads</h2>
                     <p>12:30 - 14:00</p>
-                    <p>17:00 = 18:30</p>
+                    <p>17:00 - 18:30</p>
                 </div>
 
                 <div className="imgRow1">
