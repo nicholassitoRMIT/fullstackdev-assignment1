@@ -2,7 +2,9 @@ import React from "react";
 
 function ChampionsRunMovie(){
     return(
-
+        <div className="champions">
+            
+        </div>
     )
 }
 
