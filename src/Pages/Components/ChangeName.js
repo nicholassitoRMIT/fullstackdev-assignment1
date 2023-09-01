@@ -91,7 +91,7 @@ function ChangeName(props){
         //There's not many requirements here, only that the input field is not empty
         //and the new name isn't the same as the current one.
 
-        if(name === ''){
+        if(name.trim() === ''){
             //If the field is empty, let the user know.
             alert("Please enter a name.")
         }

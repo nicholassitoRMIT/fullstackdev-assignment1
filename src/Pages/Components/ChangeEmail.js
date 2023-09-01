@@ -83,7 +83,7 @@ function ChangeEmail(props){
         -The email is in the correct format */
         
 
-        if(email === ''){
+        if(email.trim() === ''){
             //The field is empty, let the user know.
             alert("Please enter an e-mail.")
         }

@@ -6,6 +6,7 @@ import ChangeEmail from "./Components/ChangeEmail"
 import ChangeName from "./Components/ChangeName"
 import ChangePassword from "./Components/ChangePassword"
 import ProfileInfo from "./Components/ProfileInfo"
+import ReviewForm from "./Components/ReviewForm"
 
 const sUser = "currentUser"
 const sName = "name"
@@ -36,6 +37,9 @@ function ProfilePage(props){
 
             <h2>Delete account</h2>
             <DeleteAccount setHasUser = {props.setHasUser}/>
+
+            <h1>test</h1>
+            <ReviewForm movieName = {"I just shit myself in public the movie"}/>
         </div>
     )
 }
