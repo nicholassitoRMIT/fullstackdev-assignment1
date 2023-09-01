@@ -21,6 +21,9 @@ h2 {
 input {
   font-family: 'FjallaOne', sans-serif, Arial;
 }
+button {
+  font-family: 'FjallaOne', sans-serif, Arial;
+}
 .App {
   text-align: center;
   background-color: #2B2B2C;
