@@ -3,34 +3,19 @@
   src: local("FjallaOne-Regular"), url('./fonts/FjallaOne-Regular.ttf') format("truetype");
 } 
 
-h1 {
-  font-family: 'FjallaOne', sans-serif, Arial;
-}
-a {
-  font-family: 'FjallaOne', sans-serif, Arial;
-}
-p {
-  font-family: 'FjallaOne', sans-serif, Arial;
-}
-label {
-  font-family: 'FjallaOne', sans-serif, Arial;
-}
-h2 {
-  font-family: 'FjallaOne', sans-serif, Arial;
-}
-input {
-  font-family: 'FjallaOne', sans-serif, Arial;
-}
-button {
+h1, h2, a, p, label, input, button, h3, li {
   font-family: 'FjallaOne', sans-serif, Arial;
 }
 
-h3 {
+.movieTitle {
   font-family: 'FjallaOne', sans-serif, Arial;
+  text-decoration: none;
+  color: #D8A0A6;
 }
 
-li {
-  font-family: 'FjallaOne', sans-serif, Arial;
+.movieTitle:hover {
+  text-decoration: underline;
+  color: aliceblue;
 }
 
 .password-req-list {
@@ -54,22 +39,12 @@ li {
   margin-top: 50px;
 }
 
-.imgRow1 {
+.imgRow1, .imgRow2 {
   flex: 33.33%;
   padding: 30px;
 }
   
-.Climber {
-  height: 300px;
-  width: 200px;
-}
-
-.BadassWalk {
-  height: 300px;
-  width: 200px;
-}
-
-.Dancer {
+.Climber, .BadassWalk, .Dancer, .Baseball, .Skiier, .Football {
   height: 300px;
   width: 200px;
 }
@@ -77,26 +52,6 @@ li {
 .row2 {
   display: flex;
   margin-top: 50px;
-}
-
-.imgRow2 {
-  flex: 33.33%;
-  padding: 30px;
-}
-
-.Baseball {
-  height: 300px;
-  width: 200px;
-}
-
-.Skiier {
-  height: 300px;
-  width: 200px;
-}
-
-.Football {
-  height: 300px;
-  width: 200px;
 }
 
 .LoopCinemasLogo {
