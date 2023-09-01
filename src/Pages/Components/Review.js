@@ -6,6 +6,10 @@ const sText = "text"
 
 function Reviews(props){
     var reviews = localStorage.getItem(props.movieName)
+    if(reviews === null){
+        localStorage.setItem(props.movieName, JSON.stringify([]))
+        reviews = localStorage.getItem(props.movieName)
+    }
     var parsedReviews = JSON.parse(reviews)
 
     const reviewsHTML = []
