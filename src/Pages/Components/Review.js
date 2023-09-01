@@ -10,16 +10,17 @@ function Reviews(props){
 
     const reviewsHTML = []
 
-    parsedReviews.forEach(review => {
-        var thisReview = JSON.parse(review)
+    if(parsedReviews !== null)
+        parsedReviews.forEach(review => {
+            var thisReview = JSON.parse(review)
 
-        reviewsHTML.push(
-            <div>
-                <h3>Review by {thisReview[sName]}: {thisReview[sStars]} stars</h3>
-                <p>{thisReview[sText]}</p>
-            </div>
-        )
-    });
+            reviewsHTML.push(
+                <div>
+                    <h3>Review by {thisReview[sName]}: {thisReview[sStars]} stars</h3>
+                    <p>{thisReview[sText]}</p>
+                </div>
+            )
+        });
 
     if (reviewsHTML.length === 0){
         reviewsHTML.push(
