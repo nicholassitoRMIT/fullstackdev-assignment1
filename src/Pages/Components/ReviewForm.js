@@ -7,6 +7,8 @@ const sStars = "stars"
 const sText = "text"
 
 function ReviewForm(props){
+    //Component that lets the user submit, edit or delete their review.
+
     var user = localStorage.getItem(sUser)
     user = JSON.parse(user)
 

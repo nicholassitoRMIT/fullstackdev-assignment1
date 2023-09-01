@@ -14,6 +14,8 @@ const sDate = "date"
 
 function ProfilePage(props){
     //Profile page component.
+    //It has 2 hooks to update the displayed profile information whenever it is updated.
+    
     var user = localStorage.getItem(sUser)
     user = JSON.parse(user)
 
