@@ -31,9 +31,10 @@ function CrossroadsMovie(props){
             </div>
             
             <hr width="90%" align="center" color="#D8A0A6"></hr>
-            <h2>My review</h2>
+            
             {props.hasUser ?
-                <><ReviewForm movieName={movieName} setCurrentReviews={setCurrentReviews}/></>
+                <><h2>My review</h2>
+                <ReviewForm movieName={movieName} setCurrentReviews={setCurrentReviews}/></>
                 :
                 <><h2>You must be logged in to leave a review.</h2></>
             }

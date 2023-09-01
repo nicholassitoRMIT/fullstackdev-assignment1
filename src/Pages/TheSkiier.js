@@ -17,7 +17,7 @@ function TheSkiierMovie(props){
     return(
         <div>
             <div className="skiier">
-                <h1>Dance Dance Revolution</h1>
+                <h1>The Skiier</h1>
                 <img src={"./images/imgSkiier.jpg"} className="Skiier" alt="SkiierImage"></img>
                 <p>Willis Wilkinson, a pro skiier, tore his ACL in a tournament 5 years ago. Will he manage to rebuild his career, or will he be forced to quit the sport?</p>
             </div>
