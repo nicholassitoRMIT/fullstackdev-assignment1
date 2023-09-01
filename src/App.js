@@ -14,6 +14,8 @@ import LogInPage from './Pages/LogInPage';
 import MoviePage from './Pages/MoviesPage';
 import ProfilePage from './Pages/ProfilePage';
 
+import "./fonts/FjallaOne-Regular.ttf";
+
 function App() {
   //frUser = first render user
   const frUser = localStorage.getItem("currentUser") === null ? false : true

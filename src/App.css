@@ -1,3 +1,19 @@
+@font-face {
+  font-family: 'FjallaOne';
+  src: local("FjallaOne-Regular"), url('./fonts/FjallaOne-Regular.ttf') format("truetype");
+} 
+
+h1 {
+  font-family: 'FjallaOne', sans-serif, Arial;
+}
+
+p {
+  font-family: 'FjallaOne', sans-serif, Arial;
+}
+
+h2 {
+  font-family: 'FjallaOne', sans-serif, Arial;
+}
 .App {
   text-align: center;
   background-color: #2B2B2C;
