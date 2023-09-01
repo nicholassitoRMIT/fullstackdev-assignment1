@@ -6,12 +6,19 @@
 h1 {
   font-family: 'FjallaOne', sans-serif, Arial;
 }
-
+a {
+  font-family: 'FjallaOne', sans-serif, Arial;
+}
 p {
   font-family: 'FjallaOne', sans-serif, Arial;
 }
-
+label {
+  font-family: 'FjallaOne', sans-serif, Arial;
+}
 h2 {
+  font-family: 'FjallaOne', sans-serif, Arial;
+}
+input {
   font-family: 'FjallaOne', sans-serif, Arial;
 }
 .App {
