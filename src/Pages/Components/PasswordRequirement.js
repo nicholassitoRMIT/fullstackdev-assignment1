@@ -1,6 +1,8 @@
 import React from "react";
 
 function PasswordRequirement(){
+    //Component that shows the password requirements.
+    //It is shown when creating a new account or a user is changing their password.
     return (
         <div>
             <ul className="password-req-list">

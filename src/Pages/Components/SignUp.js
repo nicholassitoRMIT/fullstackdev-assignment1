@@ -39,6 +39,7 @@ const Registration = (props) => {
             alert("Password and confirm password do not match!")
         }
         //If there are no problems, create the account and log the user in.
+        //Redirect them to the homepage afterwards.
         else {
             var date = new Date().toLocaleDateString("en-GB")
             localStorage.setItem(email, JSON.stringify({
