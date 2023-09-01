@@ -5,13 +5,17 @@ import React from "react"
 function Homepage(){
     return(
         <div>
+            
+            <img src={"./images/loopcinemaslogo.jpg"} className="LoopCinemasLogo" alt="LoopLogo"></img>
+            
             <div className="introduction">
                 <h1><b>Why Loop Cinemas?</b></h1>
                 <p>Loop Cinemas is a chain of cinemas showing the latest movies in high quality at locations all across Australia. Here at Loop Cinemas, we value community interaction, therefore we offer a unique service that allows you to interact with your fellow watchers by leaving reviews. Your feedback and support is valuable to us.</p>
             </div>
 
-            <h1>Currently Showing</h1>
             
+            <h1>Currently Showing</h1>
+
             <div className="row1">
                 <div className="imgRow1">
                     <img src={'./images/imgClimber.jpg'} className="Climber" alt="ClimberImage"></img>
