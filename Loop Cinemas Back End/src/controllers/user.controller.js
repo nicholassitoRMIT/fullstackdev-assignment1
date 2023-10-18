@@ -12,7 +12,7 @@ exports.all = async (req, res) => {
 
 // Select one user from the database.
 exports.one = async (req, res) => {
-  const user = await db.user.findByPk(req.params.email);
+  const user = await db.user.findByPk(req.params.id);
 
   res.json(user);
 };
@@ -22,7 +22,7 @@ exports.login = async (req, res) => {
   const email = req.query.email
   const password = req.query.password
 
-  const user = await db.user.findByPk(email);
+  const user = await db.user.findOne({where: {email: email}});
   console.log(user)
 
   if(user === null || await argon2.verify(user.password_hash, password) === false)
@@ -44,7 +44,7 @@ exports.register = async (req, res) => {
   //they aren't trying to register with another account's e-mail.
 
   //To do that, try to get an account with the e-mail.
-  const existingUser = await db.user.findByPk(email);
+  const existingUser = await db.user.findOne({where: {email: email}});
 
   if(existingUser !== null){
     //There is already a user with the e-mail, so return null.

@@ -36,6 +36,10 @@ async function createUser(email, username, password){
     return data
 }
 
+async function updateName(username){
+
+}
+
 
 export {
     loginUser, createUser
