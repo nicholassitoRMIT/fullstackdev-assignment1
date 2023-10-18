@@ -44,9 +44,10 @@ exports.register = async (req, res) => {
   //they aren't trying to register with another account's e-mail.
 
   //To do that, try to get an account with the e-mail.
-  const existingUser = await db.user.findOne({where: {email: email}});
+  const existingEmail = await db.user.findOne({where: {email: email}});
+  const existingUsername = await db.user.findOne({where: {username: username}});
 
-  if(existingUser !== null){
+  if(existingEmail !== null || existingUsername || null){
     //There is already a user with the e-mail, so return null.
     res.json(null)
   } 

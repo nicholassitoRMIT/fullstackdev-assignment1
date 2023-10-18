@@ -37,7 +37,7 @@ async function createUser(email, username, password){
 }
 
 async function updateName(username){
-
+    
 }
 
 
