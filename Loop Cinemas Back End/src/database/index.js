@@ -52,33 +52,15 @@ async function seedData() {
   if(count == 0){
     await db.movie.create({ name: "Cream Unicorn Cookie Movie", description: "woah cream unicorn cookie movie real!1"})
     await db.movie.create({ name: "Very engaging drama", description: "this movie will live in your head rent free for the next 25 years"})
+
+    await db.movie.create({ name: "Champion's run", description: "The Louisiana Cubs are a failing baseball team, but a new coach with devilish training programmes and creative strategies was scouted to assist them for the season. Will this new coach lead them to victory, or will he be their downfall?"})
+    await db.movie.create({name: "Crossroads", description: "\"Will you walk down a path with no end?\" Max Maxington is a special ops agent given two choices- fight for his country, or fight for what he believes in."})
+    await db.movie.create({name: "Dance Dance Revolution", description: "Members of a dance troupe from South Dakota tour around the country, and along the way they rekindle their burning passion for their craft."})
+    await db.movie.create({name: "Kickout", description: "Two teams, One winner. FC Bartolomeo and Running Mazeno are the two titans of the International Football Association, and have pried their way up to face off against each other in the Grand Finals. This movie is inspired by real events."})
+    await db.movie.create({name: "The Climber", description: "A riveting tale about John Mountain, a man whose life goal is to scale the tallest mountains in the world, and his trials and tribulations in attempting to climb Mount Everest."})
+    await db.movie.create({name: "The Skiier", description: "Willis Wilkinson, a pro skiier, tore his ACL in a tournament 5 years ago. Will he manage to rebuild his career, or will he be forced to quit the sport?"})
   }
   
-  count = await db.screening.count();
-
-  if(count == 0){
-    const now = Date.now()
-    let seats = 10
-    await db.screening.create({dateTime: now, totalSeats: seats, availableSeats: seats, movieID: 1})
-  }
-
-  count = await db.review.count();
-
-  if(count == 0){
-    await db.review.create({
-      rating: 5,
-      text: "omg i love this movie <33333",
-      userEmail: "faker@gmail.com",
-      movieID: 1
-    })
-
-    await db.review.create({
-      rating: 5,
-      text: "the description is right: i'm obsessed",
-      userEmail: "faker@gmail.com",
-      movieID: 2
-    })
-  }
 }
 
 module.exports = db;

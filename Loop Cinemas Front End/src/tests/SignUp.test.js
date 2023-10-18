@@ -1,24 +1,26 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import Registration from "../Pages/Components/SignUp";
-import axios from 'axios';
+import { createUser, loginUser } from "../database/repository";
+import ProfileInfo from "../Pages/Components/ProfileInfo";
 
 // Test for creating an account with an already used e-mail
-jest.mock('axios');
-
-const mockUser = [
+const mockUserData = [
     {
         email: "bobby1@gmail.com",
         username: "bobby1",
         password: "Bobby1Password!",
     }
+    // },{
+    //     email: "bobby1@gmail.com",
+    //     username: "bobby1",
+    //     password: "Bobby1Password!",
+    // }
 ];
 
-test("email test", async () => {
-    axios.get.mockResolvedValue({ data: mockUser});
-    render(<Registration />);
-
-    const mockUserList = await waitFor(() => screen.findAllByTestId("email"))
-    expect(mockUserList).toHaveLength(1);
+test("Account is not created when identical email is inserted", async () => {
+    render(<ProfileInfo email={email} username={username}/>);
+    const errorMessage = screen.getByText(/Invalid Account/i);
+    expect(errorMessage).toBeInTheDocument();
 });
 
 // Test for creating an account with an already used username
