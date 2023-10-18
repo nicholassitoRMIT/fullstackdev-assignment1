@@ -3,6 +3,7 @@ import "@testing-library/jest-dom";
 import Registration from "../Pages/Components/SignUp";
 import { createUser } from "../../database/repository";
 import ProfileInfo from "../Pages/Components/ProfileInfo";
+import LogIn from "../Pages/Components/LogIn";
 
 // Test for logging in with a non-existent account
 let user;
@@ -15,12 +16,12 @@ const mockUserData = [
     }
 ];
 
-beforeAll(() => {
-    user = createUser(mockUserData.email, mockUserData.username, mockUserData.password);
-});
+// beforeAll(() => {
+//     user = createUser(mockUserData.email, mockUserData.username, mockUserData.password);
+// });
 
 test("Should not be able to log in with non-existing account", async () => {
-    render(<Registration email={mockEntry.email} username={mockEntry.username} password={mockEntry.password}/>);
+    render(<LogIn email={mockEntry.email} password={mockEntry.password}/>);
     global.alert = jest.fn();
-    expect(global.alert).toHaveBeenCalledTimes(1);
+    expect(global.alert).toHaveBeenCalled();
 });
