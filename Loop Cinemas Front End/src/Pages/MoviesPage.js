@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom";
 
 function MoviePage(){
+    
     return(
         <div className="MovieContent">
             <h1>Movies</h1>

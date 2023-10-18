@@ -1,10 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { getMovie } from "../database/repository";
 import Reviews from "./Components/Review";
 import ReviewForm from "./Components/ReviewForm";
 
+const sName = "name"
+const sDescription = "description"
+
 function ChampionsRunMovie(props){
     //Variable for the movie name to be passed as a prop.
-    const movieName = "Champion's run"
+    const name = "Champion's run"
+
+    const [movieName, setName] = useState('')
+    const [movieDesc, setDesc] = useState('')
+
+    useEffect(() => {
+        async function loadMovie() {
+            const movie = await getMovie(name);
+
+            setName(movie[sName])
+            setDesc(movie[sDescription])
+        }
+        loadMovie()
+    }, [])
 
     //Initialise an empty list of reviews if there aren't any.
     var reviews = localStorage.getItem(props.movieName)
@@ -20,9 +37,9 @@ function ChampionsRunMovie(props){
     return(
         <div>
             <div className="skiier">
-                <h1>Champion's Run</h1>
+                <h1>{movieName}</h1>
                 <img src={"./images/imgBaseball.jpg"} className="Baseball" alt="BaseballImage"></img>
-                <p>The Louisiana Cubs are a failing baseball team, but a new coach with devilish training programmes and creative strategies was scouted to assist them for the season. Will this new coach lead them to victory, or will he be their downfall?</p>
+                <p>{movieDesc}</p>
             </div>
 
             <hr width="90%" align="center" color="#D8A0A6"></hr>

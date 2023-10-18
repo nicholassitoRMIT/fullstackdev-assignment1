@@ -103,7 +103,52 @@ async function updatePassword(password){
     return data
 }
 
+async function getMovie(name){
+    const movie = await axios.get(DB_HOST + "/api/movies/get-name", {params: {name: name}})
+    const data = movie.data
+    console.log(data)
+    return data
+}
+
+async function getReviews(movieID){
+    const reviews = await axios.get(DB_HOST + "/api/reviews/for-movie", {params: {movieID: movieID}})
+
+    const data = reviews.data
+    console.log(data)
+    return data
+}
+
+async function getUserReview(movieID, userID){
+    const review = await axios.get(DB_HOST + "/api/reviews/by-user", {params: {movieID: movieID, userID: userID}})
+
+    const data = review.data
+    console.log(data)
+    return data
+}
+
+async function postReview(text, rating, movieID, userID){
+    const review = await axios.post(DB_HOST + "/api/reviews/create", {movieID: movieID, userID: userID, text: text, rating: rating})
+
+    const data = review.data
+    console.log(data)
+    return data
+}
+
+async function editReview(text, rating, movieID, userID){
+    const review = await axios.patch(DB_HOST + "/api/reviews/edit", {movieID: movieID, userID: userID, text: text, rating: rating})
+
+    const data = review.data
+    console.log(data)
+    return data
+}
+
+async function removeReview(movieID, userID){
+    await axios.delete(DB_HOST + "/api/reviews/delete", {params: {movieID: movieID, userID: userID}})
+}
 
 export {
-    loginUser, createUser, confirmPassword, updateName, updateEmail, updatePassword
+    loginUser, createUser, confirmPassword, 
+    updateName, updateEmail, updatePassword,
+    getMovie, getReviews, getUserReview,
+    postReview, editReview, removeReview
 }

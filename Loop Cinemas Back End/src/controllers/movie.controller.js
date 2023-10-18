@@ -12,6 +12,13 @@ exports.all = async (req, res) => {
   res.json(movies);
 };
 
+exports.byName = async (req, res) => {
+  const name = req.query.name
+  const movie = await db.movie.findOne({where: {name: name}})
+
+  res.json(movie)
+}
+
 // Create a post in the database.
 exports.create = async (req, res) => {
   const movie = await db.movie.create({

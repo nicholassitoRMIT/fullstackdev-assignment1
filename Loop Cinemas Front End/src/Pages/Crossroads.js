@@ -1,10 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Reviews from "./Components/Review";
 import ReviewForm from "./Components/ReviewForm";
+import { getMovie } from "../database/repository";
+
+const sName = "name"
+const sDescription = "description"
 
 function CrossroadsMovie(props){
     //Variable for the movie name to be passed as a prop.
-    const movieName = "Crossroads"
+    const name = "Crossroads"
+
+    const [movieName, setName] = useState('')
+    const [movieDesc, setDesc] = useState('')
+
+    useEffect(() => {
+        async function loadMovie() {
+            const movie = await getMovie(name);
+
+            setName(movie[sName])
+            setDesc(movie[sDescription])
+        }
+        loadMovie()
+    }, [])
 
     //Initialise an empty list of reviews if there aren't any.
     var reviews = localStorage.getItem(props.movieName)
@@ -20,9 +37,9 @@ function CrossroadsMovie(props){
     return(
         <div>
             <div className="crossroads">
-                <h1>Crossroads</h1>
+                <h1>{movieName}</h1>
                 <img src={'./images/imgCoolWalk.jpg'} className="BadassWalk" alt="WalkerImage"></img>
-                <p>"Will you walk down a path with no end?" Max Maxington is a special ops agent given two choices- fight for his country, or fight for what he believes in.</p>
+                <p>{movieDesc}</p>
             </div>
 
             <hr width="90%" align="center" color="#D8A0A6"></hr>

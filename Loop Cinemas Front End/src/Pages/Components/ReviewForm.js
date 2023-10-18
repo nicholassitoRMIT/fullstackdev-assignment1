@@ -1,57 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { editReview, getMovie, getUserReview, postReview, removeReview } from "../../database/repository";
 
 const sUser = "currentUser"
-const sEmail = "email"
-const sName = "name"
 const sStars = "stars"
+const sRating = "rating"
 const sText = "text"
+const sID = "id"
 
 function ReviewForm(props){
-    //Component that lets the user submit, edit or delete their review.
-    //Props contain the movie name and a useState to update the list of reviews and 
-    //re-render the component showing all reviews.
+    const userID = JSON.parse(localStorage.getItem(sUser))[sID]
 
-    var user = localStorage.getItem(sUser)
-    user = JSON.parse(user)
+    const [movieID, setID] = useState(0)
 
-    //Since this component lets the user post, edit and delete their review,
-    //we must determine if they have a review before rendering anything.
+    const [hasReview, setHasReview] = useState(false)
+    const [myReview, setMyReview] = useState('')
+    const [myRating, setMyRating] = useState('')
 
-    //Get a list of all reviews of the movie
-    var currentReviews = localStorage.getItem(props.movieName)
-
-    //If the list is null(e.g. upon opening the page for the first time)
-    //initialise an empty list.
-    if(currentReviews === null){
-        localStorage.setItem(props.movieName, JSON.stringify([]))
-        currentReviews = localStorage.getItem(props.movieName)
-    }
-    var parsedReviews = JSON.parse(currentReviews)
-
-    //Initialise variables for the user's review as if it doesn't exist.
-    var myReviewExists = false
-    var myReviewIndex = -1
-    var myReview = []
-
-    for (const review of parsedReviews){
-        var pReview = JSON.parse(review)
-
-        //Compare the reviews by e-mail since that is unique to each user.
-        if(pReview[sEmail] === user[sEmail]){
-            //if the user has a review, store that it exists, its index and the actual contents.
-            myReviewExists = true
-            myReviewIndex = parsedReviews.indexOf(review)
-            myReview = pReview
-            console.log(myReviewIndex)
-            //break the loop afterwards as it's not possible for anyone to have multiple reviews.
-            break
+    useEffect(() => {
+        async function getMovieID() {
+            const movie = await getMovie(props.movieName)
+            setID(movie[sID])
         }
-    }
 
+        async function loadMyReview(){
+            console.log(movieID)
+            const review = await getUserReview(movieID, userID)
+            if(review !== null){
+                setHasReview(true)
+                setMyReview(review[sText])
+                setMyRating(review[sRating])
+            }
+        }
+
+        getMovieID()
+        loadMyReview()
+    }, [movieID])
+
+    const [writeReview, setWrite] = useState(false)
     //Create hooks for whether the user has a review, is writing a review
     //and for the stars and text.
-    const [hasReview, setHasReview] = useState(myReviewExists)
-    const [writeReview, setWrite] = useState(false)
+    
 
     const [text, setText] = useState('')
     const [stars, setStars] = useState(0)
@@ -72,23 +60,17 @@ function ReviewForm(props){
         setText(t.target.value)
     }
 
-    function deleteReview(){
+    async function deleteReview(){
         //Function to delete the user's review.
         //Asks for confirmation first.
+
         if(window.confirm("Are you sure you want to delete your review? This action cannot be undone.")){
+            await removeReview(movieID, userID)
 
-            alert("Successfully deleted review!")
-
-            //Should the user delete their review, remove it from the list of reviews and localStorage. 
-            parsedReviews.splice(myReviewIndex, 1)
-            localStorage.setItem(props.movieName, JSON.stringify(parsedReviews))
-
-            //In addition, update the state for all reviews and whether the user has a review.
-            props.setCurrentReviews(parsedReviews)
             changeHasReview()
-
-            //We don't need to cancel here, as we never access the review writing form.
-        } 
+            setMyReview('')
+            setMyRating(0)
+        }
     }
 
     function cancel(){
@@ -99,7 +81,7 @@ function ReviewForm(props){
         changeWriteReview()
     }
 
-    function handleReviewSubmit(e){
+    async function handleReviewSubmit(e){
         e.preventDefault()
         //Function to submit the review. This function works for both editing and submitting a new review.
 
@@ -118,44 +100,25 @@ function ReviewForm(props){
             alert("Review cannot be longer than 250 characters.")
         }
         else{
-            //If the review meets the requirements, stringify it.
-            var thisReview = JSON.stringify({
-                email : user[sEmail],
-                name : user[sName],
-                stars : stars,
-                text : text
-            })
 
             if(hasReview){
-                //If the user already has a review, meaning they're editing it.
+                const review = await editReview(text, stars, movieID, userID)
                 alert("Successfully edited review!")
 
-                //We must remove the original review using the index from before and
-                //add the new one after.
-                parsedReviews.splice(myReviewIndex, 1)
-                parsedReviews.push(thisReview)
-                localStorage.setItem(props.movieName, JSON.stringify(parsedReviews))
+                setMyReview(text)
+                setMyRating(stars)
 
-                //Update the prop for all reviews.
-                props.setCurrentReviews(parsedReviews)
-
-                //In a similar way to profile editing, I use cancel to reset the form.
                 cancel()
             }
             else {
+                const review = await postReview(text, stars, movieID, userID)
                 //If the user didn't have a review before, they are submitting a new one.
                 alert("Successfully submitted review!")
 
-                //Add the new review to the list of all reviews and localStorage.
-                parsedReviews.push(thisReview)
-                localStorage.setItem(props.movieName, JSON.stringify(parsedReviews))
-
-                //Update the prop for all reviews.
-                props.setCurrentReviews(parsedReviews)
-
                 //Update the useState of the user having a review.
                 changeHasReview()
-
+                setMyReview(text)
+                setMyRating(stars)
                 //Reset the form.
                 cancel()
             }
@@ -191,7 +154,7 @@ function ReviewForm(props){
             <>
                 {hasReview ?
                 <div>
-                    <h3>{myReview[sName]}: {myReview[sStars]}</h3>
+                    <h3>{myRating} stars: {myReview}</h3>
                     <p>{myReview[sText]}</p>
                     <div className="button-box">
                         <button className="input-submit" onClick={changeWriteReview}>Edit review</button>

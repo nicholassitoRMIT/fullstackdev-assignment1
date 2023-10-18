@@ -6,7 +6,15 @@ module.exports = (express, app) => {
     router.get("/", controller.all);
   
     // Create a new post.
-    router.post("/", controller.create);
+    router.post("/create", controller.create);
+
+    router.get("/for-movie", controller.byMovie)
+
+    router.get("/by-user", controller.byMovieAndUser)
+
+    router.patch("/edit", controller.edit)
+
+    router.delete("/delete", controller.delete)
   
     // Add routes to server.
     app.use("/api/reviews", router);

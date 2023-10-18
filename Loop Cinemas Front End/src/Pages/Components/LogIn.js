@@ -19,13 +19,7 @@ function LogIn(props){
         e.preventDefault()
         //Login function.
         //Upon successful login, sets currentUser in localStorage to whoever logged in.
-        //Otherwise, shows an error
-
-        //Currently uses alerts, should be changed to something better later
-
-        //Users are stored with the e-mail as key, so we get the user from localStorage
-
-        var user = localStorage.getItem(email)
+        //Otherwise, shows an error.
 
         //Make sure all input fields are filled out
         if(email === '' || password === ''){

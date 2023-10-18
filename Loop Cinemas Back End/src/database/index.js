@@ -37,22 +37,10 @@ db.sync = async () => {
 };
 
 async function seedData() {
-  var count = await db.user.count();
+  var count = await db.movie.count();
 
-  // Only seed data if necessary.
+  //Create movies if there are none in the database
   if(count == 0){
-    const argon2 = require("argon2");
-
-    let hash = await argon2.hash("asd123", { type: argon2.argon2id });
-    await db.user.create({ email: "faker@gmail.com", username: "joanmario", password_hash: hash });
-  }
-  
-  count = await db.movie.count();
-
-  if(count == 0){
-    await db.movie.create({ name: "Cream Unicorn Cookie Movie", description: "woah cream unicorn cookie movie real!1"})
-    await db.movie.create({ name: "Very engaging drama", description: "this movie will live in your head rent free for the next 25 years"})
-
     await db.movie.create({ name: "Champion's run", description: "The Louisiana Cubs are a failing baseball team, but a new coach with devilish training programmes and creative strategies was scouted to assist them for the season. Will this new coach lead them to victory, or will he be their downfall?"})
     await db.movie.create({name: "Crossroads", description: "\"Will you walk down a path with no end?\" Max Maxington is a special ops agent given two choices- fight for his country, or fight for what he believes in."})
     await db.movie.create({name: "Dance Dance Revolution", description: "Members of a dance troupe from South Dakota tour around the country, and along the way they rekindle their burning passion for their craft."})
@@ -61,6 +49,7 @@ async function seedData() {
     await db.movie.create({name: "The Skiier", description: "Willis Wilkinson, a pro skiier, tore his ACL in a tournament 5 years ago. Will he manage to rebuild his career, or will he be forced to quit the sport?"})
   }
   
+  var count = await db.review.count();
 }
 
 module.exports = db;

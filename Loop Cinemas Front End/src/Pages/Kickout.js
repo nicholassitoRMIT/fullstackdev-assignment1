@@ -1,39 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Reviews from "./Components/Review";
 import ReviewForm from "./Components/ReviewForm";
+import KickoutComponent from "./KickoutComponent";
+
+const sID = "id"
+const sUser = "currentUser"
 
 function KickoutMovie(props){
-    //Variable for the movie name to be passed as a prop.
+
     const movieName = "Kickout"
-
-    //Initialise an empty list of reviews if there aren't any.
-    var reviews = localStorage.getItem(props.movieName)
-    if(reviews === null){
-        localStorage.setItem(props.movieName, JSON.stringify([]))
-        reviews = localStorage.getItem(props.movieName)
-    }
-    var parsedReviews = JSON.parse(reviews)
-
-    //UseState of the list of reviews to be passed as a prop.
-    const [currentReviews, setCurrentReviews] = useState(parsedReviews)
-
+    const [currentReviews, setCurrentReviews] = useState([])
+    
     return(
         <div>
-            <div className="kickout">
-                <h1>Kickout</h1>
-                <img src={"./images/imgFootball.jpg"} className="Football" alt="FootballImage"></img>
-                <p>Two teams, One winner. FC Bartolomeo and Running Mazeno are the two titans of the International Football Association, and have pried their way up to face off against each other in the Grand Finals. This movie is inspired by real events.</p>
-            </div>
-
-            <hr width="90%" align="center" color="#D8A0A6"></hr>
-
-            <div className="showtimes">
-                <h2>Showing Times</h2>
-                <p>11:00 - 12:30</p>
-                <p>13:30 - 15:00</p>
-            </div>
-
-            <hr width="90%" align="center" color="#D8A0A6"></hr>
+            <KickoutComponent movieName = {movieName}/>
             
             {props.hasUser ?
                 <><h2>My review</h2>
