@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PasswordRequirement from "./PasswordRequirement";
+import { createUser } from "../../database/repository";
 
 const Registration = (props) => {
     const [name, setName] = useState('')
@@ -10,7 +11,7 @@ const Registration = (props) => {
 
     const changePage = useNavigate()
 
-    function registerUser(e){
+    async function registerUser(e){
         e.preventDefault()
         //Registers the user in local storage. 
         //The users are stored in this format:
@@ -26,10 +27,6 @@ const Registration = (props) => {
         else if (validEmail() === false){
             alert("Invalid e-mail!")
         }
-        //Check if the e-mail is currently in use
-        else if (localStorage.getItem(email) !== null){
-            alert("E-mail already in use!")  
-        }
         //Check if the password meets the requirements
         else if(strongPasswordCheck() === false){
             alert("Password does not meet the requirements!")
@@ -41,22 +38,18 @@ const Registration = (props) => {
         //If there are no problems, create the account and log the user in.
         //Redirect them to the homepage afterwards.
         else {
-            var date = new Date().toLocaleDateString("en-GB")
-            localStorage.setItem(email, JSON.stringify({
-                name : name, 
-                password : password,
-                date : date
-            }));
 
-            localStorage.setItem("currentUser", JSON.stringify({
-                email : email,
-                name : name,
-                password : password,
-                date : date
-            }))
-            alert("Successful registration!")
-            props.setHasUser(true)
-            changePage('/')
+            //Call API to register the user.
+            const user = await createUser(email, name, password)
+
+            if(user !== null){
+                alert("Successful registration!")
+                props.setHasUser(true)
+                changePage('/')
+            }
+            else {
+                alert("E-mail already in use!")
+            }
         }
     }
 

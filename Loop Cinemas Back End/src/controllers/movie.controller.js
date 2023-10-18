@@ -19,5 +19,5 @@ exports.create = async (req, res) => {
     description: req.body.description
   });
 
-  res.json(post);
+  res.json(movie);
 };

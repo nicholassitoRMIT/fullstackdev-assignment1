@@ -8,9 +8,9 @@ import ChangePassword from "./Components/ChangePassword"
 import ProfileInfo from "./Components/ProfileInfo"
 
 const sUser = "currentUser"
-const sName = "name"
+const sName = "username"
 const sEmail = "email"
-const sDate = "date"
+const sDate = "createdAt"
 
 function ProfilePage(props){
     //Profile page.

@@ -16,15 +16,14 @@ db.user = require("./models/user.js")(db.sequelize, DataTypes)
 db.movie = require("./models/movie.js")(db.sequelize, DataTypes)
 db.screening = require("./models/movieScreening.js")(db.sequelize, DataTypes)
 db.review = require("./models/review.js")(db.sequelize, DataTypes)
-//db.post = require("./models/post.js")(db.sequelize, DataTypes);
 
-// Relate post and user.
+// Associate tables with each other.
+
+//The reviews table is associated with both users and movies,
+//and the screenings table is associated with movies.
 db.user.belongsToMany(db.movie, {through: db.review})
 db.movie.belongsToMany(db.user, {through: db.review})
 db.screening.belongsTo(db.movie, { foreignKey: {name: "movieID", allowNull: false}})
-
-
-// Learn more about associations here: https://sequelize.org/master/manual/assocs.html
 
 // Include a sync option with seed data logic included.
 db.sync = async () => {

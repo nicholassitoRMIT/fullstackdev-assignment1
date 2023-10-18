@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-//s in this case means string
-const sPassword = "password"
-const sName = "name"
-
-const sUser = "currentUser"
+import { loginUser } from "../../database/repository";
 
 function LogIn(props){
     const [email, setEmail] = useState('')
@@ -20,7 +15,7 @@ function LogIn(props){
         setPassword(p.target.value)
     }
 
-    function logIn(e){
+    async function logIn(e){
         e.preventDefault()
         //Login function.
         //Upon successful login, sets currentUser in localStorage to whoever logged in.
@@ -36,29 +31,17 @@ function LogIn(props){
         if(email === '' || password === ''){
             alert("Please fill out all fields!")
         }
-        else if(user === null){
-            //if the user is null, then there is no e-mail associated with the account
-            alert("No account associated with this e-mail!")
-        }
         else {
-            var data = JSON.parse(user)
+            //Try to log-in the user.
+            const user = await loginUser(email, password)
 
-            //check for correct password
-            if(data[sPassword] === password){
-                //Upon a successful log-in, put the user as currentUser in localStorage, 
-                //show a pop-up for a successful log-in, change the hasUser state
-                //and send the user to the homepage.
-                localStorage.setItem(sUser, JSON.stringify({
-                    email : email,
-                    name : data[sName],
-                    password : data[sPassword]
-                }))
+            if (user !== null){
                 alert("Successful log-in!")
                 props.setHasUser(true)
                 changePage('/')
             }
-            else{
-                alert("Incorrect password!")
+            else {
+                alert("Log-in failed. Make sure the e-mail and password are correct.")
             }
         }
 
