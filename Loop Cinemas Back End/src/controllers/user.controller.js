@@ -110,5 +110,19 @@ exports.changeEmail = async (req, res) => {
 }
 
 exports.changePassword = async (req, res) => {
+  const password = req.body.password
+  const id = req.body.id
 
+  const thisUser = await db.user.findByPk(id)
+
+  if(await argon2.verify(thisUser.password_hash, password) === true){
+    // Password is same as before
+    res.json(null);
+  }
+  else {
+    const hash = await argon2.hash(password)
+
+    await thisUser.update({password_hash: hash})
+    res.json(thisUser)
+  }
 }

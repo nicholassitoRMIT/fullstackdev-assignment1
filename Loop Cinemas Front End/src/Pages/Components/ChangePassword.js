@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { confirmPassword, updatePassword } from "../../database/repository";
 import PasswordRequirement from "./PasswordRequirement";
 
 const sName = "name"
@@ -83,13 +84,13 @@ function ChangePassword(){
         setConPassword('')
     }
 
-    function verifyPassword(e){
+    async function verifyPassword(e){
         e.preventDefault()
 
         //Verifies the user's current password.
-        //Upon successful verification, the user may enter a new password.
+        //Upon successful verification, the user may enter a new name.
 
-        if(password === user[sPassword]){
+        if(await confirmPassword(password)){
             changePWConfirmation()
         } 
         else {
@@ -97,7 +98,7 @@ function ChangePassword(){
         }
     }
 
-    function handleChangePassword(e){
+    async function handleChangePassword(e){
         e.preventDefault()
 
         /*Function that actually changes the user's password.
@@ -111,10 +112,6 @@ function ChangePassword(){
             //If a field is empty, let the user know.
             alert("Please enter new password and confirm password.")
         }
-        else if(newPassword === user[sPassword]){
-            //If the new password is the same as the current one, let the user know.
-            alert("You entered your current password.")
-        }
         else if(strongPasswordCheck() === false){
             //If the new password is not strong, let the user know.
             alert("New password doesn't meet the requirements!")
@@ -124,26 +121,19 @@ function ChangePassword(){
             alert("New password and confirm password do not match!")
         }
         else{
-            //If all requirements are met, update the localStorage items for the profile and currentUser.
-            localStorage.setItem(user[sEmail], JSON.stringify({
-                name : user[sName], 
-                password : newPassword,
-                date : user[sDate]
-            }))
+            const user = await updatePassword(newPassword)
 
-            localStorage.setItem(sUser, JSON.stringify({
-                email : user[sEmail],
-                name : user[sName], 
-                password : newPassword,
-                date : user[sDate]
-            }))
+            if(user !== null){
+                //Inform the user of the successful change and change the hook 
+                //used by another component, namely the one that shows the profile information.
+                alert("Successfully changed password!")
 
-            //Inform the user of successful password change.
-            //Since we're not showing the password, we don't need to update any hooks.
-            alert("Successfully changed password!")
-
-            //Vcancel to reset the form.
-            vcancel()
+                //I use vcancel here to reset the form.
+                vcancel()
+            }
+            else {
+                alert("This is the same password!")
+            }
         }
     }
 

@@ -93,7 +93,25 @@ async function updateEmail(email){
     return data
 }
 
+async function updatePassword(password){
+    //Updates a user's email in the database.
+    const userID = JSON.parse(localStorage.getItem(sUser))[sID]
+
+    const user = await axios.patch(DB_HOST + "/api/users/change-password", {password: password, id: userID})
+    const data = user.data
+
+    //The API call will either return the user data or null.
+    //null is returned when the user is trying to change their email to one that's already taken.
+
+    if(data !== null) {
+        //Persistent and automatic log-in with localStorage
+        localStorage.setItem(sUser, JSON.stringify(data))
+    }
+
+    return data
+}
+
 
 export {
-    loginUser, createUser, confirmPassword, updateName, updateEmail
+    loginUser, createUser, confirmPassword, updateName, updateEmail, updatePassword
 }
