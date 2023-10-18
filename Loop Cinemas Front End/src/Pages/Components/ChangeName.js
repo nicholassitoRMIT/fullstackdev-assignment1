@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import { updateName, confirmPassword } from "../../database/repository";
 
 const sName = "name"
-const sPassword = "password"
-const sEmail = "email"
 const sUser = "currentUser"
-const sDate = "date"
 
 function ChangeName(props){
     //Component for changing the user's name.

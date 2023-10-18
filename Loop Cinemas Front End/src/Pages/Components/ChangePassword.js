@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import { confirmPassword, updatePassword } from "../../database/repository";
 import PasswordRequirement from "./PasswordRequirement";
 
-const sName = "name"
-const sPassword = "password"
-const sEmail = "email"
 const sUser = "currentUser"
-const sDate = "date"
 
 function ChangePassword(){
     //Component for changing the user's password.
