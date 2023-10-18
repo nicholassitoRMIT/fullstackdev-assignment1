@@ -2,6 +2,7 @@ import axios from "axios";
 
 const DB_HOST = "http://localhost:4000"
 const sUser = "currentUser"
+const sID = "id"
 
 async function loginUser(email, password) {
     //Function to log in the user.
@@ -36,7 +37,63 @@ async function createUser(email, username, password){
     return data
 }
 
+async function confirmPassword(password){
+    //Verifies the password when changing name/e-mail/password on the user's account.
+
+    //Get user ID from local storage
+    const userID = JSON.parse(localStorage.getItem(sUser))[sID]
+    console.log(userID)
+
+    const user = await axios.get(DB_HOST + "/api/users/verify-password", {params: {password: password, id: userID}})
+    const data = user.data
+
+    //The API call will return null for a wrong password and the user data for a right one.
+    //Since we don't need the data itself, only whether the password is correct, we return true/false.
+    if(data !== null) {
+        return true
+    }
+    else {
+        return false
+    }
+}
+
+async function updateName(username){
+    //Updates a user's username in the database.
+    const userID = JSON.parse(localStorage.getItem(sUser))[sID]
+
+    const user = await axios.patch(DB_HOST + "/api/users/change-name", {username: username, id: userID})
+    const data = user.data
+
+    //The API call will either return the user data or null.
+    //null is returned when the user is trying to change their username to one that's already taken.
+
+    if(data !== null) {
+        //Persistent and automatic log-in with localStorage
+        localStorage.setItem(sUser, JSON.stringify(data))
+    }
+
+    return data
+}
+
+async function updateEmail(email){
+    //Updates a user's email in the database.
+    const userID = JSON.parse(localStorage.getItem(sUser))[sID]
+
+    const user = await axios.patch(DB_HOST + "/api/users/change-email", {email: email, id: userID})
+    const data = user.data
+
+    //The API call will either return the user data or null.
+    //null is returned when the user is trying to change their email to one that's already taken.
+
+    if(data !== null) {
+        //Persistent and automatic log-in with localStorage
+        localStorage.setItem(sUser, JSON.stringify(data))
+    }
+
+    return data
+}
+
 
 export {
-    loginUser, createUser
+    loginUser, createUser, confirmPassword, updateName, updateEmail
 }

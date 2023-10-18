@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) =>
   //id - primary key
   //rating - star rating, from 1 - 5
   //text - review text
-  //userEmail - foreign key to reference user
+  //userID - foreign key to reference user
   //movieID - foreign key to reference movie
   sequelize.define("review", {
     id: {

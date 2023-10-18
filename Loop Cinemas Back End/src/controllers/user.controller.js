@@ -12,7 +12,7 @@ exports.all = async (req, res) => {
 
 // Select one user from the database.
 exports.one = async (req, res) => {
-  const user = await db.user.findByPk(req.params.email);
+  const user = await db.user.findByPk(req.params.id);
 
   res.json(user);
 };
@@ -22,7 +22,7 @@ exports.login = async (req, res) => {
   const email = req.query.email
   const password = req.query.password
 
-  const user = await db.user.findByPk(email);
+  const user = await db.user.findOne({where: {email: email}});
   console.log(user)
 
   if(user === null || await argon2.verify(user.password_hash, password) === false)
@@ -44,9 +44,10 @@ exports.register = async (req, res) => {
   //they aren't trying to register with another account's e-mail.
 
   //To do that, try to get an account with the e-mail.
-  const existingUser = await db.user.findByPk(email);
+  const existingEmail = await db.user.findOne({where: {email: email}});
+  const existingUsername = await db.user.findOne({where: {username: username}});
 
-  if(existingUser !== null){
+  if(existingEmail !== null || existingUsername || null){
     //There is already a user with the e-mail, so return null.
     res.json(null)
   } 
@@ -62,6 +63,52 @@ exports.register = async (req, res) => {
   }
 };
 
+exports.verifyPassword = async (req, res) => {
+  console.log(req)
+  const password = req.query.password
+  const user = await db.user.findByPk(req.query.id);
+
+  if(await argon2.verify(user.password_hash, password) === false){
+    // Password verification failed.
+    res.json(null);
+  }
+  else {
+    res.json(user);
+  }
+}
+
 exports.changeName = async (req, res) => {
+  const username = req.body.username
+  const id = req.body.id
+
+  const existingUsername = await db.user.findOne({where: {username: username}});
+
+  if(existingUsername !== null){
+    res.json(null)
+  }
+  else {
+    const thisUser = await db.user.findByPk(id)
+    await thisUser.update({username: username})
+    res.json(thisUser)
+  }
+}
+
+exports.changeEmail = async (req, res) => {
+  const email = req.body.email
+  const id = req.body.id
+
+  const existingEmail = await db.user.findOne({where: {email: email}});
+
+  if(existingEmail !== null){
+    res.json(null)
+  }
+  else {
+    const thisUser = await db.user.findByPk(id)
+    await thisUser.update({email: email})
+    res.json(thisUser)
+  }
+}
+
+exports.changePassword = async (req, res) => {
 
 }
