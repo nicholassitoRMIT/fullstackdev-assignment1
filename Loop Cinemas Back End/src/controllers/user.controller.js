@@ -63,6 +63,52 @@ exports.register = async (req, res) => {
   }
 };
 
+exports.verifyPassword = async (req, res) => {
+  console.log(req)
+  const password = req.query.password
+  const user = await db.user.findByPk(req.query.id);
+
+  if(await argon2.verify(user.password_hash, password) === false){
+    // Password verification failed.
+    res.json(null);
+  }
+  else {
+    res.json(user);
+  }
+}
+
 exports.changeName = async (req, res) => {
+  const username = req.body.username
+  const id = req.body.id
+
+  const existingUsername = await db.user.findOne({where: {username: username}});
+
+  if(existingUsername !== null){
+    res.json(null)
+  }
+  else {
+    const thisUser = await db.user.findByPk(id)
+    await thisUser.update({username: username})
+    res.json(thisUser)
+  }
+}
+
+exports.changeEmail = async (req, res) => {
+  const email = req.body.email
+  const id = req.body.id
+
+  const existingEmail = await db.user.findOne({where: {email: email}});
+
+  if(existingEmail !== null){
+    res.json(null)
+  }
+  else {
+    const thisUser = await db.user.findByPk(id)
+    await thisUser.update({email: email})
+    res.json(thisUser)
+  }
+}
+
+exports.changePassword = async (req, res) => {
 
 }

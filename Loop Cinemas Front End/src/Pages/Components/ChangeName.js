@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { updateName, confirmPassword } from "../../database/repository";
 
 const sName = "name"
 const sPassword = "password"
@@ -69,13 +70,13 @@ function ChangeName(props){
         setName('')
     }
 
-    function verifyPassword(e){
+    async function verifyPassword(e){
         e.preventDefault()
 
         //Verifies the user's password.
         //Upon successful verification, the user may enter a new name.
 
-        if(password === user[sPassword]){
+        if(await confirmPassword(password)){
             changePWConfirmation()
         } 
         else {
@@ -83,7 +84,7 @@ function ChangeName(props){
         }
     }
 
-    function handleChangeName(e){
+    async function handleChangeName(e){
         e.preventDefault()
 
         //Function that changes the name.
@@ -100,27 +101,20 @@ function ChangeName(props){
             alert("You entered your current name.")
         }
         else{
-            //Upon a successful change, update the respective items in localStorage.
-            localStorage.setItem(user[sEmail], JSON.stringify({
-                name : name, 
-                password : user[sPassword],
-                date : user[sDate]
-            }))
+            const user = await updateName(name)
 
-            localStorage.setItem(sUser, JSON.stringify({
-                email : user[sEmail],
-                name : name, 
-                password : user[sPassword],
-                date : user[sDate]
-            }))
+            if(user !== null){
+                //Inform the user of the successful change and change the hook 
+                //used by another component, namely the one that shows the profile information.
+                alert("Successfully changed name!")
+                props.setCurrentName(name)
 
-            //Inform the user of the successful change and change the hook 
-            //used by another component, namely the one that shows the profile information.
-            alert("Successfully changed name!")
-            props.setCurrentName(name)
-
-            //I use vcancel here to reset the form.
-            vcancel()
+                //I use vcancel here to reset the form.
+                vcancel()
+            }
+            else {
+                alert("Username already taken!")
+            }
         }
     }
 

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { confirmPassword, updateEmail } from "../../database/repository";
 
 const sName = "name"
 const sPassword = "password"
@@ -72,7 +73,7 @@ function ChangeEmail(props){
         setEmail('')
     }
 
-    function handleChangeEmail(e){
+    async function handleChangeEmail(e){
         e.preventDefault()
 
         /*Function that actually changes the user's email.
@@ -91,10 +92,6 @@ function ChangeEmail(props){
             //If the user inputs the same email as their current one, let them know.
             alert("You entered your current e-mail.")
         }
-        else if(localStorage.getItem(email) !== null){
-            //If the new e-mail is already in use, let the user know.
-            alert("E-mail is already in use!")
-        }
         else if(validEmail() === false){
             //If the new e-mail is not in proper format, let the user know.
             alert("Invalid e-mail!")
@@ -102,29 +99,20 @@ function ChangeEmail(props){
         else{
             //Profiles are stored in localStorage using the e-mail as the key, so to change it
             //we must essentially "delete" the original profile and recreate it with the new e-mail.
-            localStorage.removeItem(user[sEmail])
+            const user = await updateEmail(email)
 
-            localStorage.setItem(email, JSON.stringify({
-                name : user[sName], 
-                password : user[sPassword],
-                date : user[sDate]
-            }))
+            if(user !== null){
+                //Inform the user of the successful change and change the hook 
+                //used by another component, namely the one that shows the profile information.
+                alert("Successfully changed e-mail!")
+                props.setCurrentEmail(email)
 
-            //In addition, change the current user in localStorage as well.
-            localStorage.setItem(sUser, JSON.stringify({
-                email : email,
-                name : user[sName], 
-                password : user[sPassword],
-                date : user[sDate]
-            }))
-
-            //Inform the user of the successful change and change the hook 
-            //used by another component, namely the one that shows the profile information.
-            alert("Successfully changed e-mail!")
-            props.setCurrentEmail(email)
-
-            //I use vcancel here to reset the form.
-            vcancel()
+                //I use vcancel here to reset the form.
+                vcancel()
+            }
+            else {
+                alert("E-mail already taken!")
+            }
         }
     }
 
@@ -143,13 +131,13 @@ function ChangeEmail(props){
         }
     }
 
-    function verifyPassword(e){
+    async function verifyPassword(e){
         e.preventDefault()
 
         //Verifies the user's password.
         //Upon successful verification, the user may enter a new e-mail address.
 
-        if(password === user[sPassword]){
+        if(await confirmPassword(password)){
             changePWConfirmation()
         } 
         else {

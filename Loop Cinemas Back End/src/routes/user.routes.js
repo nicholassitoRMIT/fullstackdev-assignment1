@@ -14,6 +14,18 @@ module.exports = (express, app) => {
   //Register a new user.
   router.post("/register", controller.register)
 
+  //
+  router.get("/verify-password", controller.verifyPassword)
+
+  //Change a user's name
+  router.patch("/change-name", controller.changeName)
+
+  //Change a user's password
+  router.patch("/change-password", controller.changePassword)
+
+  //Change a user's email
+  router.patch("/change-email", controller.changeEmail)
+
   // Add routes to server.
   app.use("/api/users", router);
 };

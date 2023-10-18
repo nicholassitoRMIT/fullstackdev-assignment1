@@ -48,7 +48,7 @@ const Registration = (props) => {
                 changePage('/')
             }
             else {
-                alert("E-mail already in use!")
+                alert("E-mail or username are already in use!")
             }
         }
     }
