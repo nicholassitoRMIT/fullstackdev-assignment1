@@ -64,7 +64,8 @@ exports.register = async (req, res) => {
 };
 
 exports.verifyPassword = async (req, res) => {
-  console.log(req)
+  //Verify a user's password when they change account details.
+  //The request will have the user id and inputted password.
   const password = req.query.password
   const user = await db.user.findByPk(req.query.id);
 
@@ -78,6 +79,8 @@ exports.verifyPassword = async (req, res) => {
 }
 
 exports.changeName = async (req, res) => {
+  //Changes the user's username in the database.
+  //Will not change the username if the user tries to take an existing username.
   const username = req.body.username
   const id = req.body.id
 
@@ -94,6 +97,8 @@ exports.changeName = async (req, res) => {
 }
 
 exports.changeEmail = async (req, res) => {
+  //Changes a user's e-mail in the database.
+  //Will not work if the e-mail is already used on another account.
   const email = req.body.email
   const id = req.body.id
 
@@ -110,6 +115,8 @@ exports.changeEmail = async (req, res) => {
 }
 
 exports.changePassword = async (req, res) => {
+  //Changes a user's password in the database.
+  //The password cannot be the same as it was.
   const password = req.body.password
   const id = req.body.id
 

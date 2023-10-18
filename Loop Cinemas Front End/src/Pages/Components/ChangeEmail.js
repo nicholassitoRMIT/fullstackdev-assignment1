@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { confirmPassword, updateEmail } from "../../database/repository";
 
-const sName = "name"
-const sPassword = "password"
 const sEmail = "email"
 const sUser = "currentUser"
-const sDate = "date"
 
 function ChangeEmail(props){
     //Component for changing the user's email.
